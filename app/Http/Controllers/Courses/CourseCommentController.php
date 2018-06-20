@@ -15,4 +15,19 @@ class CourseCommentController extends Controller
             $course->comments()->with(['children', 'user'])->get()
       );
     }
+
+    public function store(Course $course, Request $request)
+    {
+      $this->validate($request, [
+        'body' => 'required'
+      ]);
+
+      $comment = $course->comments()->make([
+        'body' => $request->body
+      ]);
+
+      $request->user()->comments()->save($comment);
+
+      return new CommentResource($comment);
+    }
 }
