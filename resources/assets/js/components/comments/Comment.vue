@@ -4,6 +4,7 @@
     <div class="media-body">
       <p class="mb-2">
         <strong>{{ comment.user.name }}</strong>
+        {{ comment.created_at }}
       </p>
 
       <p>{{ comment.body }}</p>

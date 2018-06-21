@@ -48591,6 +48591,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -48617,7 +48618,8 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "media-body" }, [
       _c("p", { staticClass: "mb-2" }, [
-        _c("strong", [_vm._v(_vm._s(_vm.comment.user.name))])
+        _c("strong", [_vm._v(_vm._s(_vm.comment.user.name))]),
+        _vm._v("\n      " + _vm._s(_vm.comment.created_at) + "\n    ")
       ]),
       _vm._v(" "),
       _c("p", [_vm._v(_vm._s(_vm.comment.body))])
