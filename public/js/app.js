@@ -47341,6 +47341,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -47391,8 +47392,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
                 this.comments = comments.data.data;
+                this.meta = comments.data.meta;
 
-              case 4:
+              case 5:
               case 'end':
                 return _context.stop();
             }
@@ -48476,6 +48478,10 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("h3", { staticClass: "mb-5" }, [
+        _vm._v(_vm._s(_vm.meta.total) + " comments")
+      ]),
+      _vm._v(" "),
       _c("new-comment", { attrs: { endpoint: _vm.endpoint } }),
       _vm._v(" "),
       _vm.comments.length

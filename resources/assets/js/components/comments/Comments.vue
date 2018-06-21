@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3 class="mb-5">{{ meta.total }} comments</h3>
     <new-comment
     :endpoint="endpoint"
     >
@@ -51,6 +52,7 @@
         let comments = await this.fetchComments(page)
 
         this.comments = comments.data.data
+        this.meta = comments.data.meta
       },
 
       prependComment (comment) {
