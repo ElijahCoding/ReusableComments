@@ -47322,8 +47322,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Comment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Comment__);
 
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47407,6 +47417,39 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
 
       return loadComments;
+    }(),
+    loadMore: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var _comments;
+
+        var comments;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(this.endpoint + '?page=' + (this.meta.current_page + 1));
+
+              case 2:
+                comments = _context2.sent;
+
+
+                (_comments = this.comments).push.apply(_comments, _toConsumableArray(comments.data.data));
+                this.meta = comments.data.meta;
+
+              case 5:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function loadMore() {
+        return _ref2.apply(this, arguments);
+      }
+
+      return loadMore;
     }(),
     prependComment: function prependComment(comment) {
       console.log(comment);
@@ -48497,9 +48540,24 @@ var render = function() {
               })
             )
           ]
-        : _vm._e(),
+        : _c("p", { staticClass: "mt-4" }, [_vm._v("No comments to display")]),
       _vm._v(" "),
-      _c("p", { staticClass: "mt-4" }, [_vm._v("No comments to display")])
+      _vm.meta.current_page < _vm.meta.last_page
+        ? _c(
+            "a",
+            {
+              staticClass: "btn btn-light btn-block",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.loadMore($event)
+                }
+              }
+            },
+            [_vm._v("Show More\n  ")]
+          )
+        : _vm._e()
     ],
     2
   )
