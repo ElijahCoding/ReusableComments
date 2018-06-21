@@ -47311,9 +47311,19 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_js__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NewComment__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NewComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NewComment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bus_js__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__NewComment__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__NewComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__NewComment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Comment__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Comment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Comment__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 //
 //
 //
@@ -47323,11 +47333,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      comments: [],
+      meta: {},
+      reply: null
+    };
+  },
+
+
   props: {
     endpoint: {
       required: true,
@@ -47336,17 +47365,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   components: {
-    NewComment: __WEBPACK_IMPORTED_MODULE_1__NewComment___default.a
+    NewComment: __WEBPACK_IMPORTED_MODULE_3__NewComment___default.a,
+    Comment: __WEBPACK_IMPORTED_MODULE_4__Comment___default.a
   },
 
   methods: {
+    fetchComments: function fetchComments() {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(this.endpoint + '?page=' + this.meta.current_page);
+    },
+    loadComments: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+        var comments;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.fetchComments(page);
+
+              case 2:
+                comments = _context.sent;
+
+
+                this.comments = comments.data.data;
+
+              case 4:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function loadComments() {
+        return _ref.apply(this, arguments);
+      }
+
+      return loadComments;
+    }(),
     prependComment: function prependComment(comment) {
       console.log(comment);
     }
   },
 
   mounted: function mounted() {
-    __WEBPACK_IMPORTED_MODULE_0__bus_js__["a" /* default */].$on('comment:stored', this.prependComment);
+    this.loadComments(1);
+
+    __WEBPACK_IMPORTED_MODULE_2__bus_js__["a" /* default */].$on('comment:stored', this.prependComment);
   }
 });
 
@@ -48407,8 +48475,27 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("new-comment", { attrs: { endpoint: _vm.endpoint } })],
-    1
+    [
+      _c("new-comment", { attrs: { endpoint: _vm.endpoint } }),
+      _vm._v(" "),
+      _vm.comments.length
+        ? [
+            _c(
+              "ul",
+              { staticClass: "list-unstyled" },
+              _vm._l(_vm.comments, function(comment) {
+                return _c("comment", {
+                  key: comment.id,
+                  attrs: { comment: comment }
+                })
+              })
+            )
+          ]
+        : _vm._e(),
+      _vm._v(" "),
+      _c("p", { staticClass: "mt-4" }, [_vm._v("No comments to display")])
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -48437,6 +48524,115 @@ if (false) {
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = (new Vue());
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(12)
+/* script */
+var __vue_script__ = __webpack_require__(56)
+/* template */
+var __vue_template__ = __webpack_require__(57)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/comments/Comment.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-aacd1d8a", Component.options)
+  } else {
+    hotAPI.reload("data-v-aacd1d8a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    comment: {
+      required: true,
+      type: Object
+    }
+  }
+});
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("li", { staticClass: "media mt-4 mb-4" }, [
+    _c("img", {
+      staticClass: "mr-3",
+      attrs: { src: _vm.comment.user.avatar, alt: "" }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "media-body" }, [
+      _c("p", { staticClass: "mb-2" }, [
+        _c("strong", [_vm._v(_vm._s(_vm.comment.user.name))])
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.comment.body))])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-aacd1d8a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
