@@ -56,6 +56,12 @@
           return axios.get(`${this.endpoint}?page=${this.meta.current_page}`)
       },
 
+      async fetchMeta () {
+        let comments = await axios.get(`${this.endpoint}?page=${this.meta.current_page}`)
+
+        this.meta = comments.data.meta
+      },
+
       async loadComments(page = 1) {
         let comments = await this.fetchComments(page)
 
@@ -70,8 +76,14 @@
         this.meta = comments.data.meta
       },
 
-      prependComment (comment) {
-        console.log(comment)
+      async prependComment (comment) {
+        this.comments.unshift(comment)
+
+        await this.fetchMeta()
+
+        if (this.meta.current_page < this.meta.last_page) {
+          this.comments.pop()
+        }
       },
 
     },

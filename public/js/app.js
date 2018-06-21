@@ -47386,25 +47386,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(this.endpoint + '?page=' + this.meta.current_page);
     },
-    loadComments: function () {
+    fetchMeta: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
         var comments;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.fetchComments(page);
+                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(this.endpoint + '?page=' + this.meta.current_page);
 
               case 2:
                 comments = _context.sent;
 
 
-                this.comments = comments.data.data;
                 this.meta = comments.data.meta;
 
-              case 5:
+              case 4:
               case 'end':
                 return _context.stop();
             }
@@ -47412,29 +47410,28 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }, _callee, this);
       }));
 
-      function loadComments() {
+      function fetchMeta() {
         return _ref.apply(this, arguments);
       }
 
-      return loadComments;
+      return fetchMeta;
     }(),
-    loadMore: function () {
+    loadComments: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-        var _comments;
-
+        var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
         var comments;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(this.endpoint + '?page=' + (this.meta.current_page + 1));
+                return this.fetchComments(page);
 
               case 2:
                 comments = _context2.sent;
 
 
-                (_comments = this.comments).push.apply(_comments, _toConsumableArray(comments.data.data));
+                this.comments = comments.data.data;
                 this.meta = comments.data.meta;
 
               case 5:
@@ -47445,15 +47442,76 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }, _callee2, this);
       }));
 
-      function loadMore() {
+      function loadComments() {
         return _ref2.apply(this, arguments);
+      }
+
+      return loadComments;
+    }(),
+    loadMore: function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+        var _comments;
+
+        var comments;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(this.endpoint + '?page=' + (this.meta.current_page + 1));
+
+              case 2:
+                comments = _context3.sent;
+
+
+                (_comments = this.comments).push.apply(_comments, _toConsumableArray(comments.data.data));
+                this.meta = comments.data.meta;
+
+              case 5:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function loadMore() {
+        return _ref3.apply(this, arguments);
       }
 
       return loadMore;
     }(),
-    prependComment: function prependComment(comment) {
-      console.log(comment);
-    }
+    prependComment: function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(comment) {
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                this.comments.unshift(comment);
+
+                _context4.next = 3;
+                return this.fetchMeta();
+
+              case 3:
+
+                if (this.meta.current_page < this.meta.last_page) {
+                  this.comments.pop();
+                }
+
+              case 4:
+              case 'end':
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function prependComment(_x3) {
+        return _ref4.apply(this, arguments);
+      }
+
+      return prependComment;
+    }()
   },
 
   mounted: function mounted() {
