@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="reply">
-      {{ reply }}
+      <comment-reply :comment="reply"></comment-reply>
     </template>
 
     <template v-else>
@@ -35,6 +35,7 @@
   import bus from '../../bus.js'
   import NewComment from './NewComment'
   import Comment from './Comment'
+  import CommentReply from './CommentReply'
 
   export default {
     data () {
@@ -54,7 +55,8 @@
 
     components: {
       NewComment,
-      Comment
+      Comment,
+      CommentReply
     },
 
     methods: {
@@ -104,6 +106,8 @@
       bus.$on('comment:stored', this.prependComment)
 
       bus.$on('comment:reply', this.setReplying)
+
+      bus.$on('comment:reply-cancelled', () => this.reply = null)
     }
   }
 </script>
